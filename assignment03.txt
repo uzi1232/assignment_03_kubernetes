@@ -1,0 +1,8 @@
+Repository: https://github.com/uzi1232/assignment_03_kubernetes
+Comments: 
+    Execution order:
+    1. kubectl apply -f deployment_probe.yml
+    2. kubectl apply -f namespace.yml
+    3. kubectl apply -f load_balancer.yml
+    4. kubectl apply -f horizontal_auto_scaler.yml
+    5. kubectl apply -f stateful_set.yml

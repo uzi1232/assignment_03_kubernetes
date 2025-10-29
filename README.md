@@ -6,6 +6,3 @@
 1. kubectl apply -f load_balancer.yml
 1. kubectl apply -f horizontal_auto_scaler.yml
 1. kubectl apply -f stateful_set.yml
-
-## Notes
-- It takes 5 minutes to scale down as default. 
