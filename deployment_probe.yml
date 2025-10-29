@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: probe
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: probe-deployment
+  namespace: probe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: probe
+  template:
+    metadata:
+      labels:
+        app: probe
+    spec:
+      containers:
+      - name: probe
+        image: uyahya/assignments:probe
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: probe-service
+  namespace: probe
+spec:
+  selector:
+    app: probe
+  ports:
+    - port: 30010
+      targetPort: 30010

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: application
+  namespace: uyahya
+spec:
+  serviceName: application-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: application-container
+  template:
+    metadata:
+      labels:
+        app: application-container
+    spec:
+      containers:
+      - name: application-container
+        image: uyahya/assignments:assignment3_server
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        readinessProbe:
+          exec:
+            command: ["curl", "-f", "http://probe-service.probe.svc.cluster.local:30010/isAlive"]
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            cpu: 1000m
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi
