@@ -41,7 +41,7 @@ class HttpHandler(BaseHTTPRequestHandler):
             self.send_header("Content-type", "text/plain")
             self.end_headers()
             self.wfile.write(value.encode("utf-8"))
-            cpu_intensive_task(3)
+            cpu_intensive_task(2)
         else:
             response = f"{self.path} not found."
             self.send_response(404)
